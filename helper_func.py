@@ -1,5 +1,6 @@
 # (©)Codexbotz
 # Recode by @mrismanaziz
+# Clone by @ItsMeYons
 # t.me/SharingUserbot & t.me/Lunatic0de
 
 import asyncio
@@ -10,18 +11,18 @@ from pyrogram import filters
 from pyrogram.errors import FloodWait
 from pyrogram.errors.exceptions.bad_request_400 import UserNotParticipant
 
-from config import ADMINS, FORCE_SUB_CHANNEL, FORCE_SUB_GROUP
+from config import ADMINS, FORCE_SUB_1, FORCE_SUB_2, FORCE_SUB_3, FORCE_SUB_4
 
 
 async def subschannel(filter, client, update):
-    if not FORCE_SUB_CHANNEL:
+    if not FORCE_SUB_1:
         return True
     user_id = update.from_user.id
     if user_id in ADMINS:
         return True
     try:
         member = await client.get_chat_member(
-            chat_id=FORCE_SUB_CHANNEL, user_id=user_id
+            chat_id=FORCE_SUB_1, user_id=user_id
         )
     except UserNotParticipant:
         return False
@@ -29,35 +30,80 @@ async def subschannel(filter, client, update):
     return member.status in ["creator", "administrator", "member"]
 
 
-async def subsgroup(filter, client, update):
-    if not FORCE_SUB_GROUP:
+async def subschchannel(filter, client, update):
+    if not FORCE_SUB_2:
         return True
     user_id = update.from_user.id
     if user_id in ADMINS:
         return True
     try:
-        member = await client.get_chat_member(chat_id=FORCE_SUB_GROUP, user_id=user_id)
+        member = await client.get_chat_member(chat_id=FORCE_SUB_2, user_id=user_id)
     except UserNotParticipant:
         return False
 
     return member.status in ["creator", "administrator", "member"]
 
 
-async def is_subscribed(filter, client, update):
-    if not FORCE_SUB_CHANNEL:
-        return True
-    if not FORCE_SUB_GROUP:
+async def subschchannelch(filter, client, update):
+    if not FORCE_SUB_3:
         return True
     user_id = update.from_user.id
     if user_id in ADMINS:
         return True
     try:
-        member = await client.get_chat_member(chat_id=FORCE_SUB_GROUP, user_id=user_id)
+        member = await client.get_chat_member(chat_id=FORCE_SUB_3, user_id=user_id)
+    except UserNotParticipant:
+        return False
+
+    return member.status in ["creator", "administrator", "member"]
+
+
+async def subschchannelfc(filter, client, update):
+    if not FORCE_SUB_4:
+        return True
+    user_id = update.from_user.id
+    if user_id in ADMINS:
+        return True
+    try:
+        member = await client.get_chat_member(chat_id=FORCE_SUB_4, user_id=user_id)
+    except UserNotParticipant:
+        return False
+
+    return member.status in ["creator", "administrator", "member"]
+
+
+
+async def is_subscribed(filter, client, update):
+    if not FORCE_SUB_1:
+        return True
+    if not FORCE_SUB_2:
+        return True
+    if not FORCE_SUB_3:
+        return True
+    if not FORCE_SUB_4:
+        return True
+    user_id = update.from_user.id
+    if user_id in ADMINS:
+        return True
+    try:
+        member = await client.get_chat_member(chat_id=FORCE_SUB_1, user_id=user_id)
     except UserNotParticipant:
         return False
     try:
         member = await client.get_chat_member(
-            chat_id=FORCE_SUB_CHANNEL, user_id=user_id
+            chat_id=FORCE_SUB_2, user_id=user_id
+        )
+    except UserNotParticipant:
+        return False
+    try:
+        member = await client.get_chat_member(
+            chat_id=FORCE_SUB_3, user_id=user_id
+        )
+    except UserNotParticipant:
+        return False
+    try:
+        member = await client.get_chat_member(
+            chat_id=FORCE_SUB_4, user_id=user_id
         )
     except UserNotParticipant:
         return False
@@ -85,8 +131,7 @@ async def get_messages(client, message_ids):
     while total_messages != len(message_ids):
         temb_ids = message_ids[total_messages : total_messages + 200]
         try:
-            msgs = await client.get_messages(
-                chat_id=client.db_channel.id, message_ids=temb_ids
+            msgs = await client.get_messages(chat_id=client.db_channel.id, message_ids=temb_ids
             )
         except FloodWait as e:
             await asyncio.sleep(e.x)
@@ -122,6 +167,23 @@ async def get_message_id(client, message):
             return msg_id
 
 
-subsgc = filters.create(subsgroup)
-subsch = filters.create(subschannel)
+subsatu = filters.create(subschannel)
+subdua = filters.create(subschchannel)
+subtiga = filters.create(subschchannelch)
+subempat = filters.create(subschchannelfc)
 subsall = filters.create(is_subscribed)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
