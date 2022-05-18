@@ -22,9 +22,8 @@ Saya Kira Ini Akan Bermanfaat Bagi Banyak Orang.. 😇.
 
 ##
 ### Installation
-#### Deploy on Heroku
-[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://risman.vercel.app/file-deploy.html)</br>
-
+#### Deploy on Heroku<a href="https://dashboard.heroku.com/new?template=https://github.com/Yonsganteng/gabutaja"><img src="https://img.shields.io/badge/Deploy%20To%20Heroku-blueviolet?style=for-the-badge&logo=heroku" width="215"> </a> <br>
+ll
 **Tonton Video Tutorial Ini di YouTube untuk Bantuan memasang di Heroku**<br>
 <a href="https://youtu.be/O2tieQgzYZg">
   <img src="https://img.shields.io/badge/How%20to-Deploy-red?logo=youtube" width="147">
